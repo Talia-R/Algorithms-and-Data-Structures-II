@@ -16,6 +16,8 @@ public class App {
         s.append("\n3) Contar quantidade de repetições de um laço");
         s.append("\nExtras");
         s.append("\n4) Fatorial");
+        s.append("\n5) Fibonacci");
+        s.append("\n6) Multiplicando X por Y vezes");
 
         return s.toString();
     }
@@ -54,6 +56,20 @@ public class App {
         }
         return fib;
     }
+
+    public static int multiplyRecursiveAddition(int x, int y){
+        int sum;
+        if(y == 0){
+            sum = 0;
+        } else {
+            sum = x + multiplyRecursiveAddition(x , y - 1);
+        }
+        return sum;
+    }
+
+    public static int biggestNumber(int[] numbers, int size){
+
+    }
     public static void main(String[] args) throws Exception {
         int entry;
         
@@ -75,6 +91,11 @@ public class App {
                     System.out.print(" --- Fibonacci ---");
                     int x = readInt("Deseja saber o Fibonacci de qual número?: ");
                     System.out.printf("O Fibonacci de %d é: %d.", x, fibonacci(x));
+                }
+                case 6 -> {
+                    int x = readInt("Digite o primeiro número: ");
+                    int y = readInt("Digite o segundo número: ");
+                    System.out.println(multiplyRecursiveAddition(x, y));
                 }
             }
 
