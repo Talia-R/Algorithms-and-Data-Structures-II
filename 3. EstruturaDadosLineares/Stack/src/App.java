@@ -99,9 +99,38 @@ public class App {
         */
 
         System.out.println("--- Pilha Encadeada ---");
-        PilhaEncadeada pilhaEncadeada = new PilhaEncadeada();
+        PilhaEncadeada<Integer> pilhaEncadeada = new PilhaEncadeada<>();
+        PilhaEncadeada<Integer> outraPilha = new PilhaEncadeada<>();
+
         pilhaEncadeada.push(10);
-    
-    
+        pilhaEncadeada.push(6);
+        pilhaEncadeada.push(7);
+
+        outraPilha.push(10);
+        outraPilha.push(2);
+        outraPilha.push(8);
+        outraPilha.push(8);
+
+        pilhaEncadeada.concatenar(outraPilha);
+        
+        // System.out.println(pilhaEncadeada.imprimir());
+        System.out.println(pilhaEncadeada.obterNumeroItens());
+        System.out.println(outraPilha.obterNumeroItens());
+        ehPalindromo("teste");
+    }
+
+    public static void ehPalindromo(String frase){
+        PilhaEncadeada<Character> pilha = new PilhaEncadeada<>();
+        for(char c : frase.toCharArray()){
+            pilha.push(c);
+        }
+
+        /*
+        String[] fraseArray = frase.split("");
+        for(int i = 0; i < fraseArray.length ; i++){
+            pilha.push(fraseArray[i]);
+        } */
+        
+            System.out.println(pilha.ehPalindromo());
     }
 }
