@@ -14,11 +14,18 @@ public class FilaEncadeada<E> {
        tras = novaCelula;
     }
 
-    public void desenfileirar(){
+    public Celula<E> desenfileirar(){
         if(isEmpty()) throw new IllegalStateException("Fila está vazia");
-        Celula<E> item2AposSentinela = sentinela.getProximo().getProximo();
-        sentinela.setProximo(item2AposSentinela);
-        if(item2AposSentinela == null) tras = sentinela;
+
+        Celula<E> atual = frente.getProximo();
+
+        if(atual.getProximo() == null) tras = frente;
+
+        frente.setProximo(atual.getProximo());
+
+        atual.setProximo(null);
+
+        return atual;
     }
     
     public boolean isEmpty(){
@@ -35,4 +42,38 @@ public class FilaEncadeada<E> {
 
         return s.toString();
     }
+
+    public int obterNumItensAFrente(E item){
+        int qnt = 0;
+        Celula<E> atual = frente.getProximo();
+        while(atual != null){
+            if(atual.getItem().equals(item)) return qnt;
+            qnt++;
+            atual = atual.getProximo();
+        }
+        throw new IllegalStateException("Item não encontrado na fila");
+    }
+
+    public FilaEncadeada<E> dividir(){
+        FilaEncadeada<E> filaAux = new FilaEncadeada<>();
+        FilaEncadeada<E> filaPar = new FilaEncadeada<>();
+        boolean par = true;
+
+        while(!isEmpty()){
+            if(par){
+                filaPar.enfileirar(desenfileirar().getItem());
+            } else{
+                filaAux.enfileirar(desenfileirar().getItem());
+            }
+            par = !par;
+        }
+
+        while(!filaAux.isEmpty()){
+            enfileirar(filaAux.desenfileirar().getItem());
+        }
+
+        return filaPar;
+    }
+
+
 }
